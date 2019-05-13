@@ -100,9 +100,18 @@ namespace MongoDbGenericRepository
                 throw ex;
             }
         }
-        public Task DeleteAll()
+        public async Task<long> DeleteAll<TEntity>() where TEntity : IEntity
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                var deleteResult = await GetCollection<TEntity>().DeleteManyAsync(_ => true);
+                return deleteResult.DeletedCount;
+            }
+            catch (System.Exception ex)
+            {
+                
+                throw ex;
+            }
         }
         private IMongoCollection<TEntity> GetCollection<TEntity>() where TEntity : IEntity
         {

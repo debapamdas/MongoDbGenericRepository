@@ -13,6 +13,6 @@ namespace MongoDbGenericRepository.Abstractions
         Task Add<TEntity>(TEntity item) where TEntity : IEntity;
         Task<long> Update<TEntity>(Expression<Func<TEntity, bool>> expression, TEntity item) where TEntity : IEntity;
         Task<long> Delete<TEntity>(Expression<Func<TEntity, bool>> expression) where TEntity : IEntity;
-        Task DeleteAll();
+        Task<long> DeleteAll<TEntity>() where TEntity : IEntity;
     }
 }
